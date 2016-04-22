@@ -3,6 +3,7 @@ FROM alpine:latest
 RUN \
 	apk add --no-cache \
 		nodejs \
+		openssl \
 	&& apk add --no-cache --virtual .build-deps \
 		make \
         g++ \
@@ -16,9 +17,10 @@ RUN \
 
 COPY ./haraka /etc/haraka
 
+COPY ./gencert.sh /
 COPY ./docker-entrypoint.sh /
 
-RUN chmod +x /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh /gencert.sh
 
 VOLUME ["/data"]
 
