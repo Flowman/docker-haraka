@@ -33,6 +33,14 @@ if [ "$1" = 'haraka' ]; then
     ln -s /data/ssl/server.crt /etc/haraka/config/tls_cert.pem
 
     if [ ! -f "/etc/haraka/configured" ]; then
+        mkdir /tmp/db
+        cp createdb.js /tmp/db
+        cp database.sql /tmp/db
+        cd /tmp/db
+        npm install mysql
+        node createdb.js
+        rm -rf /tmp/db
+        
         hostname -f > /etc/haraka/config/host_list
 
         sed -i -e "s/host*=.*/host=$MYSQL_HOST/g" /etc/haraka/config/auth_sql_cryptmd5.ini /etc/haraka/config/quota.check.ini /etc/haraka/config/aliases_mysql.ini
