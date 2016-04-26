@@ -85,7 +85,7 @@ exports.get_plain_passwd = function(connection, user, cb) {
             if (err) return cb(err);
 
             if ((results[0] && results[0].user || null) === user) {
-                return cb(null, results[0].password);
+                return cb(null, results[0].password.slice(11));
             }
 
             cb(new Error("No such user "+ user));
@@ -102,7 +102,7 @@ exports.check_plain_passwd = function (connection, user, passwd, cb) {
         }
 
         var offset = crypted_passwd.indexOf("$", 3);     // find end of the salt, skip hash based identification
-        var pwSalt = crypted_passwd.substr(3, (offset -3));
+        var pwSalt = crypted_passwd.substr(3, (offset -3));   
         var hashed = cryptmd5.cryptMD5(passwd, pwSalt);
 
         if (hashed === crypted_passwd) {

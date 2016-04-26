@@ -51,9 +51,9 @@ if [ "$1" = 'haraka' ]; then
         hostname -f > /etc/haraka/config/host_list
 
         sed -i -e "s/host*=.*/host=$MYSQL_HOST/g" /etc/haraka/config/auth_sql_cryptmd5.ini /etc/haraka/config/quota.check.ini /etc/haraka/config/aliases_mysql.ini
-        sed -i -e "s/user*=.*/host=$MYSQL_USER/g" /etc/haraka/config/auth_sql_cryptmd5.ini /etc/haraka/config/quota.check.ini /etc/haraka/config/aliases_mysql.ini
-        sed -i -e "s/password*=.*/host=$MYSQL_PASSWORD/g" /etc/haraka/config/auth_sql_cryptmd5.ini /etc/haraka/config/quota.check.ini /etc/haraka/config/aliases_mysql.ini
-        sed -i -e "s/database*=.*/host=$MYSQL_DATABASE/g" /etc/haraka/config/auth_sql_cryptmd5.ini /etc/haraka/config/quota.check.ini /etc/haraka/config/aliases_mysql.ini
+        sed -i -e "s/user*=.*/user=$MYSQL_USER/g" /etc/haraka/config/auth_sql_cryptmd5.ini /etc/haraka/config/quota.check.ini /etc/haraka/config/aliases_mysql.ini
+        sed -i -e "s/password*=.*/password=$MYSQL_PASSWORD/g" /etc/haraka/config/auth_sql_cryptmd5.ini /etc/haraka/config/quota.check.ini /etc/haraka/config/aliases_mysql.ini
+        sed -i -e "s/database*=.*/database=$MYSQL_DATABASE/g" /etc/haraka/config/auth_sql_cryptmd5.ini /etc/haraka/config/quota.check.ini /etc/haraka/config/aliases_mysql.ini
 
         touch /etc/haraka/configured
     fi
