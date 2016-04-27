@@ -8,7 +8,7 @@ RUN \
         make \
         g++ \
         python \
-    && npm install -g Haraka@2.7.3 mkdirp mysql \
+    && npm install -g Haraka@2.7.3 mysql \
     && haraka -i /etc/haraka \
     && apk del .build-deps \
     && mkdir /data \
