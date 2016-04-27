@@ -100,12 +100,14 @@ exports.hook_mail = function (next, connection, params) {
             return next(DENYSOFT);
         }
 
-        //@todo quota should only work with numeric values...
-        connection.logdebug(exports, "Quota of user ", email, " limit=\""+ user.quota +" M\" used=\""+ user.bytes +" bytes\"");
+        if (user){
+            //@todo quota should only work with numeric values...
+            connection.logdebug(exports, "Quota of user ", email, " limit=\""+ user.quota +" M\" used=\""+ user.bytes +" bytes\"");
 
-        var usedQuotaInM = (user.bytes / 1048576).toFixed(1);
-        if (usedQuotaInM > user.quota) {
-            return next(DENY, DSN.mbox_full());
+            var usedQuotaInM = (user.bytes / 1048576).toFixed(1);
+            if (usedQuotaInM > user.quota) {
+                return next(DENY, DSN.mbox_full());
+            }
         }
 
         return next();
