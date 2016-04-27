@@ -36,8 +36,12 @@ if [ "$1" = 'haraka' ]; then
     # set hostname as me
     hostname -f > /etc/haraka/config/me
     # link in certs
-    ln -s /data/ssl/server.key /etc/haraka/config/tls_key.pem
-    ln -s /data/ssl/server.crt /etc/haraka/config/tls_cert.pem
+    if [ ! -f /etc/haraka/config/tls_key.pem ] && [ -e /data/ssl/server.key ]; then
+        ln -s /data/ssl/server.key /etc/haraka/config/tls_key.pem 2> /dev/null
+    fi     
+    if [ ! -f /etc/haraka/config/tls_cert.pem ] && [ -e /data/ssl/server.crt ]; then
+        ln -s /data/ssl/server.crt /etc/haraka/config/tls_cert.pem 2> /dev/null
+    fi
 
     if [ ! -f "/etc/haraka/configured" ]; then
         mkdir /tmp/db
