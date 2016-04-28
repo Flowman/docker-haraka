@@ -60,4 +60,6 @@ rm server.key.org
 # Generate the cert (good for 10 years)
 openssl x509 -req -days 3650 -in server.csr -signkey server.key -out server.crt
 fail_if_error $?
-echo ""
+
+# Generate 
+openssl dhparam -dsaparam -out dh4096.pem 4096

@@ -41,8 +41,7 @@ auth/auth_sql_cryptmd5
 
 # MAIL FROM
 # Only accept mail where the MAIL FROM domain is resolvable to an MX record
-# @todo prod necessary?
-#mail_from.is_resolvable
+mail_from.is_resolvable
 #spf
 
 # ALIASES
@@ -59,10 +58,6 @@ rcpt_to.in_host_list
 #rcpt_to.ldap
 #rcpt_to.routes
 
-# drop relaying when inbound flag
-# @todo is this necessary, does this improve anything???, in a sense its reasonable
-#rcpt_ok/drop_relaying_when_host_list
-
 # DATA
 bounce
 # Check mail headers are valid
@@ -75,10 +70,10 @@ spamassassin
 #karma
 quota.check
 
-# LOCAL DELIVERY
+# QUEUE
+# queues: discard  qmail-queue  quarantine  smtp_forward  smtp_proxy
+# Queue mail via smtp - see config/smtp_forward.ini for where your mail goes
 queue/lmtp
-
-# OUTBOUND
 
 # Disconnect client if they spew bad SMTP commands at us
 max_unrecognized_commands
